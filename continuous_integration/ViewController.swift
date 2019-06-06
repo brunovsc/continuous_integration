@@ -14,7 +14,18 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-
+    
+    func bigger10(value: Int) -> Bool{
+        if value > 10 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func notCovered() -> String {
+        let a = 100
+        return "\(a)"
+    }
 }
 
