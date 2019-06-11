@@ -26,9 +26,9 @@ Description of what the lane does
 fastlane ios coverage
 ```
 
-### ios ipa
+### ios ipa_develop
 ```
-fastlane ios ipa
+fastlane ios ipa_develop
 ```
 
 
