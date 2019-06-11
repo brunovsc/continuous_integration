@@ -1,0 +1,42 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Description of what the lane does"
+  lane :tests do
+    run_tests(scheme: "continuous_integration",
+              devices: ["iPhone Xʀ"],
+              code_coverage: true)
+  end
+  lane :coverage do 
+    #scan
+    xcov(
+         scheme: "continuous_integration",
+         #minimum_coverage_percentage: 40.0,
+         json_report: true
+    )
+  end
+  lane :ipa_develop do
+    build_ios_app(
+      configuration: "Debug",
+      scheme: "continuous_integration",
+      clean: true,
+      export_method: 'development',
+      output_name: "fastlane_jenkins.ipa",
+    )
+  end
+end

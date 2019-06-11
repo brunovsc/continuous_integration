@@ -26,7 +26,24 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      codeCoverageEnabled = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "1E4A82CE228DA3240030FD2D"
+            BuildableName = "continuous_integrationTests.xctest"
+            BlueprintName = "continuous_integrationTests"
+            ReferencedContainer = "container:continuous_integration.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "1E4A82D9228DA3240030FD2D"
+            BuildableName = "continuous_integrationUITests.xctest"
+            BlueprintName = "continuous_integrationUITests"
+            ReferencedContainer = "container:continuous_integration.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
             skipped = "NO">
