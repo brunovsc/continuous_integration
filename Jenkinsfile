@@ -16,7 +16,6 @@ pipeline {
                     }
                     catch (exc) {
                         githubNotify context: 'Jenkins', description: 'Tests Failed',  status: 'FAILURE'
-                        throw
                     }
                 }                
             }
