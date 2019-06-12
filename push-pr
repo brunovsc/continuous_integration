@@ -1,0 +1,9 @@
+#!/bin/sh
+
+BRANCH_FROM=$1
+BRANCH_TO=$2
+
+push -u origin $1
+
+./pull-request $1 $2
+

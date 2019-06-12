@@ -14,8 +14,9 @@ pipeline {
 //               echo 'Cloned Repository'
 //            }
 //        }
-        stage('Build') { 
+        stage('Build') {
             steps {
+                sh 'which fastlane'
                 sh 'echo test build'
             }
         }

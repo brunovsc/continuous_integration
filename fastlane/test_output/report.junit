@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <testsuites name='continuous_integrationUITests.xctest' tests='4' failures='0'>
   <testsuite name='continuous_integrationTests.continuous_integrationTests' tests='3' failures='0'>
-    <testcase classname='continuous_integrationTests.continuous_integrationTests' name='testFailure' time='0.005'/>
-    <testcase classname='continuous_integrationTests.continuous_integrationTests' name='testPerformanceExample' time='0.362'/>
-    <testcase classname='continuous_integrationTests.continuous_integrationTests' name='testSuccess' time='0.002'/>
+    <testcase classname='continuous_integrationTests.continuous_integrationTests' name='testFailure' time='0.002'/>
+    <testcase classname='continuous_integrationTests.continuous_integrationTests' name='testPerformanceExample' time='0.292'/>
+    <testcase classname='continuous_integrationTests.continuous_integrationTests' name='testSuccess' time='0.001'/>
   </testsuite>
   <testsuite name='continuous_integrationUITests.continuous_integrationUITests' tests='1' failures='0'>
-    <testcase classname='continuous_integrationUITests.continuous_integrationUITests' name='testExample' time='4.784'/>
+    <testcase classname='continuous_integrationUITests.continuous_integrationUITests' name='testExample' time='4.689'/>
   </testsuite>
 </testsuites>

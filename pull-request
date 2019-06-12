@@ -1,0 +1,14 @@
+#!/bin/sh
+
+BRANCH_FROM=$1
+BRANCH_TO=$2
+
+hub pull-request --base $BRANCH_TO --head $BRANCH_FROM
+
+echo "Pull-request created from $BRANCH_FROM to $BRANCH_TO."
+
+curl -I -X POST brunovsc:1187b015ea5c35bbe3f9b999a72af1d2bc@localhost:8080/job/ios-test/buildWithParameters?BRANCH=$BRANCH_FROM -H "Jenkins-Crumb:8500b1488bdd3ae6eda573cacc5cf677"
+
+echo "Build triggered on branch $BRANCH_FROM."
+
+
