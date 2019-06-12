@@ -10,9 +10,9 @@ pipeline {
                 }
                 //sh 'ls -la continuous_integration'
                 echo 'Cloned Repository'
+                //sh 'ls -la continuous_integration'
+                echo 'Cloned Repository'
             }
-            //sh 'ls -la continuous_integration'
-            echo 'Cloned Repository'
         }
         stage('Build') { 
             steps {
