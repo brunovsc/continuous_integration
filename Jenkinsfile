@@ -24,7 +24,10 @@ pipeline {
         stage('Test') { 
             steps {
                 dir('continuous_integration') {
+                    sh 'bundle install'
+                    sh 'echo before'
                     sh 'bundle exec fastlane tests'
+                    sh 'echo after'
                 }
             }
         }
