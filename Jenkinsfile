@@ -10,13 +10,15 @@ pipeline {
             steps {
                 githubNotify context: 'Jenkins', description: 'Running Tests',  status: 'PENDING'
                 dir('continuous_integration') {
-                    try {
-                        sh 'bundle exec fastlane tests'
-                        sh 'bundle exec fastlane coverage'                    
-                    }
-                    catch (exc) {
-                        githubNotify context: 'Jenkins', description: 'Tests Failed',  status: 'FAILURE'
-                    }
+                    steps {
+                        try {
+                            sh 'bundle exec fastlane tests'
+                            sh 'bundle exec fastlane coverage'                    
+                        }
+                        catch (exc) {
+                            githubNotify context: 'Jenkins', description: 'Tests Failed',  status: 'FAILURE'
+                        }
+                    }                    
                 }                
             }
         }
