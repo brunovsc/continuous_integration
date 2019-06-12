@@ -23,7 +23,7 @@ pipeline {
         stage('Test') { 
             steps {
                 dir('continuous_integration') {
-                    sh 'fastlane tests'
+                    sh 'bundle exec fastlane tests'
                 }
             }
         }
