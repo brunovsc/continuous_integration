@@ -16,6 +16,7 @@ pipeline {
 //        }
         stage('Build') {
             steps {
+                sh 'bundle install'
                 sh 'which fastlane'
                 sh 'echo test build'
             }
