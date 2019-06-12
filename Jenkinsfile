@@ -1,30 +1,24 @@
 pipeline {
     agent any 
-    stages {    
-//        stage('Clone Repo') {
-//            steps {
-//                sh 'rm -rf continuous_integration'
-//                sh 'git clone https://github.com/brunovsc/continuous_integration.git'
-//                dir('continuous_integration') {
-//                    sh "git checkout ${params.BRANCH}"
-//                }
-//                //sh 'ls -la continuous_integration'
-//               echo 'Cloned Repository'
-//               //sh 'ls -la continuous_integration'
-//               echo 'Cloned Repository'
-//            }
-//        }
+    stages {
         stage('Build') {
             steps {
-                sh 'echo test build'
+                githubNotify context: 'Jenkins', description: 'Build Failed',  status: 'ERROR'
             }
         }
         stage('Test') { 
             steps {
+                githubNotify context: 'Jenkins', description: 'Running Tests',  status: 'PENDING'
                 dir('continuous_integration') {
-                    sh 'bundle exec fastlane tests'
-                    sh 'bundle exec fastlane coverage'
-                }
+                    try {
+                        sh 'bundle exec fastlane tests'
+                        sh 'bundle exec fastlane coverage'                    
+                    }
+                    catch (exc) {
+                        githubNotify context: 'Jenkins', description: 'Tests Failed',  status: 'FAILURE'
+                        throw
+                    }
+                }                
             }
         }
         stage('Deploy') { 
