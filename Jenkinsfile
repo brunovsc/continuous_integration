@@ -16,18 +16,14 @@ pipeline {
 //        }
         stage('Build') {
             steps {
-                sh 'bundle install'
-                sh 'which fastlane'
                 sh 'echo test build'
             }
         }
         stage('Test') { 
             steps {
                 dir('continuous_integration') {
-                    sh 'bundle install'
-                    sh 'echo before'
                     sh 'bundle exec fastlane tests'
-                    sh 'echo after'
+                    sh 'bundle exec fastlane coverage'
                 }
             }
         }
