@@ -22,7 +22,7 @@ pipeline {
         stage('Test') { 
             steps {
                 dir('continuous_integration') {
-                    sh 'fastlane tests'
+                    sh 'fastlane coverage'
                     junit 'fastlane/report.xml'
                 }
             }
