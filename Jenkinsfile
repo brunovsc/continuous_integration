@@ -23,7 +23,6 @@ pipeline {
             steps {
                 dir('continuous_integration') {
                     sh 'fastlane tests'
-                    junit 'fastlane/report.xml'
                 }
             }
         }
