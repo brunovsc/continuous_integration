@@ -23,12 +23,12 @@ platform :ios do
               code_coverage: true)
   end
   lane :coverage do 
-    #scan
-    xcov(
-         scheme: "continuous_integration",
-         #minimum_coverage_percentage: 40.0,
-         json_report: true
-    )
+    scan
+    # xcov(
+    #      scheme: "continuous_integration",
+    #      #minimum_coverage_percentage: 40.0,
+    #      json_report: true
+    # )
   end
   lane :ipa_develop do
     build_ios_app(
