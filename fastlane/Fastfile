@@ -18,14 +18,16 @@ default_platform(:ios)
 platform :ios do
   desc "Description of what the lane does"
   lane :tests do
+    puts("====== run tests")
     run_tests(scheme: "continuous_integration",
               devices: ["iPhone Xʀ"],
               code_coverage: true)
-    xcov(
-         scheme: "continuous_integration",
+    puts("====== xcov")
+    xcov(scheme: "continuous_integration",
          #minimum_coverage_percentage: 40.0,
          json_report: true
     )
+    puts("====== done")
   end
   lane :coverage do 
     scan
@@ -38,5 +40,9 @@ platform :ios do
       export_method: 'development',
       output_name: "fastlane_jenkins.ipa",
     )
+  end
+
+  error do |lane, exception|
+
   end
 end
