@@ -12,8 +12,8 @@ pipeline {
                 dir('continuous_integration') {
                     script {
                         try {
-                            sh 'bundle exec fastlane tests'
-                            sh 'bundle exec fastlane coverage'                 
+                            sh 'bundle exec fastlane unit_test'
+                            sh 'bundle exec fastlane test_coverage'                 
                             githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Tests succeeded', status: 'SUCCESS'   
                         }
                         catch (exc) {
