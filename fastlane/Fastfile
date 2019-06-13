@@ -24,7 +24,7 @@ platform :ios do
   end
   lane :test_coverage do 
     xcov(scheme: "continuous_integration",
-         #minimum_coverage_percentage: 40.0,
+         minimum_coverage_percentage: 50.0,
          json_report: true
     )
   end

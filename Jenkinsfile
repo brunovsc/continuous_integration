@@ -10,17 +10,17 @@ pipeline {
             steps {
                 githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Running Tests', status: 'PENDING'
                 dir('continuous_integration') {
-                    // steps {
                     script {
                         try {
                             sh 'bundle exec fastlane tests'
-                            sh 'bundle exec fastlane coverage'                    
+                            sh 'bundle exec fastlane coverage'                 
+                            githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Tests succeeded', status: 'SUCCESS'   
                         }
                         catch (exc) {
+                            echo exc
                             githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Tests failed', status: 'FAILURE'
                         }
-                    }                        
-                    // }                    
+                    }                       
                 }                
             }
         }
