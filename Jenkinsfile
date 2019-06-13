@@ -12,7 +12,6 @@ pipeline {
                 dir('continuous_integration') {
                     script {
                         try {
-                            sh 'cat Fastfile'
                             sh 'cat fastlane/Fastfile'
                             sh 'bundle install'
                             sh 'bundle exec fastlane ios unit_test'
