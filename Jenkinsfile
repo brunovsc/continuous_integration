@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                githubNotify credentialsId: 'jenkins-pipeline', context: 'Jenkins', description: 'Build Failed',  status: 'ERROR'
+                githubNotify account: 'brunovsc', credentialsId: 'jenkins-pipeline', context: 'Jenkins', description: 'Build Failed',  status: 'ERROR'
             }
         }
         stage('Test') { 
             steps {
-                githubNotify credentialsId: 'jenkins-pipeline',context: 'Jenkins', description: 'Running Tests',  status: 'PENDING'
+                githubNotify account: 'brunovsc', credentialsId: 'jenkins-pipeline',context: 'Jenkins', description: 'Running Tests',  status: 'PENDING'
                 dir('continuous_integration') {
                     steps {
                         script {
@@ -17,7 +17,7 @@ pipeline {
                                 sh 'bundle exec fastlane coverage'                    
                             }
                             catch (exc) {
-                                githubNotify credentialsId: 'jenkins-pipeline',context: 'Jenkins', description: 'Tests Failed',  status: 'FAILURE'
+                                githubNotify account: 'brunovsc', credentialsId: 'jenkins-pipeline',context: 'Jenkins', description: 'Tests Failed',  status: 'FAILURE'
                             }
                         }                        
                     }                    
