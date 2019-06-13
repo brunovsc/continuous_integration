@@ -6,9 +6,9 @@ pipeline {
                 githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Running Tests', status: 'PENDING'
             }
         }
-        // stage('Test') { 
-        //     steps {
-        //         githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Running Tests', status: 'PENDING'
+        stage('Test') { 
+            steps {
+                githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Running Tests', status: 'PENDING'
         //         dir('continuous_integration') {
         //             steps {
         //                 script {
@@ -22,8 +22,8 @@ pipeline {
         //                 }                        
         //             }                    
         //         }                
-        //     }
-        // }
+            }
+        }
         stage('Deploy') { 
             steps {
                 sh 'echo test deploy'
