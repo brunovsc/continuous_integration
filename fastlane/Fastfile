@@ -18,13 +18,18 @@
 platform :ios do
   desc "Description of what the lane does"
 
+  lane :printError do | options | 
+    errorCode = options[:errorCode]
+    sh "echo #{errorCode} > testErrorCode"
+  end
+
   lane :test do    
     begin
       run_tests(scheme: "continuous_integration",
                 devices: ["iPhone Xʀ"])
     rescue => ex
       UI.important('run_tests failed!')
-      puts 1 # error code for tests failed
+      printError(errorCode: 1) # error code for tests failed
       next
     end
     begin
@@ -33,7 +38,7 @@ platform :ios do
            json_report: true)
     rescue => ex
       UI.important('xcov failed!')
-      puts 2 # error code for xcov failed
+      printError(errorCode: 2) # error code for xcov failed
       next
     end
   end
@@ -45,11 +50,16 @@ platform :ios do
   end
 
   lane :test_coverage do 
+    begin
     xcov(scheme: "continuous_integration",
          minimum_coverage_percentage: 50.0,
          json_report: true)
+    rescue => ex
+      UI.important('xcov failed!')
+      echo 2
+    end
   end
-  
+
   lane :ipa_develop do
     build_ios_app(
       configuration: "Debug",
