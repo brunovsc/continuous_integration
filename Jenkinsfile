@@ -14,7 +14,7 @@ pipeline {
                         sh 'git checkout develop'
                         sh 'bundle exec fastlane ios test > resultFile'
                         def result = readFile('resultFile').trim()
-                        echo '$result'
+                        echo "${result}"
                         //sh 'bundle exec fastlane ios test_coverage'                 
                         githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Tests succeeded', status: 'SUCCESS'   
                     }
