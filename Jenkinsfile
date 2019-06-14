@@ -12,8 +12,8 @@ pipeline {
                 script {
                     try {
                         sh 'git checkout develop'
-                        sh 'bundle exec fastlane ios test > resultFile'
-                        def result = readFile('fastfile/testErrorCode').trim()
+                        sh 'bundle exec fastlane ios test'
+                        def result = readFile('fastlane/testErrorCode').trim()
                         echo "ErrorCode = ${result}"
                         if (result == 1) {
                             echo "AAAAA 1"
