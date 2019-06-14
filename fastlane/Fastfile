@@ -19,7 +19,7 @@ platform :ios do
   desc "Description of what the lane does"
 
   lane :printCode do | options | 
-    errorCode = options[:code]
+    code = options[:code]
     sh "echo #{code} > testResultCode"
   end
 
