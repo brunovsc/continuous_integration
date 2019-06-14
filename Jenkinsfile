@@ -11,7 +11,7 @@ pipeline {
                 githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Running Tests', status: 'PENDING'
                 script {
                     try {
-                        sh 'git checkout ${env.BRANCH_NAME}'
+                        sh "git checkout ${env.BRANCH_NAME}"
                         sh 'bundle exec fastlane ios test'
                         def result = readFile('fastlane/testResultCode').trim()
                         echo "ResultCode = ${result}"
