@@ -9,20 +9,28 @@ pipeline {
         stage('Test') { 
             steps {
                 githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Running Tests', status: 'PENDING'
-                dir('continuous_integration') {
-                    script {
-                        try {
-                            sh 'cat fastlane/Fastfile'
-                            sh 'bundle exec fastlane ios unit_test'
-                            sh 'bundle exec fastlane ios test_coverage'                 
-                            githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Tests succeeded', status: 'SUCCESS'   
+                script {
+                    try {
+                        echo "${env.BRANCH_NAME}"
+                        sh "git checkout ${env.BRANCH_NAME}"
+                        sh 'bundle exec fastlane ios test'
+                        def result = readFile('fastlane/testResultCode').trim()
+                        echo "ResultCode = ${result}"
+                        if (result == '0') {
+                            githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Tests succeeded', status: 'SUCCESS'  
                         }
-                        catch (exc) {
-                            echo exc
-                            githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Tests failed', status: 'FAILURE'
+                        if (result == '1') {
+                            githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Tests broken', status: 'FAILURE'
                         }
-                    }                       
-                }                
+                        if (result == '2') {
+                            githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Low code coverage', status: 'FAILURE'
+                        } 
+                    }
+                    catch (exc) {
+                        echo exc
+                        githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Tests failed', status: 'FAILURE'
+                    }
+                }              
             }
         }
         stage('Deploy') { 
