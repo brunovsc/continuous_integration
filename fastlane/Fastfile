@@ -17,6 +17,13 @@
 
 platform :ios do
   desc "Description of what the lane does"
+  lane :test do    
+    run_tests(scheme: "continuous_integration",
+              devices: ["iPhone Xʀ"])
+    xcov(scheme: "continuous_integration",
+         minimum_coverage_percentage: 50.0,
+         json_report: true)
+  end
   lane :unit_test do
     run_tests(scheme: "continuous_integration",
               devices: ["iPhone Xʀ"],
@@ -25,8 +32,7 @@ platform :ios do
   lane :test_coverage do 
     xcov(scheme: "continuous_integration",
          minimum_coverage_percentage: 50.0,
-         json_report: true
-    )
+         json_report: true)
   end
   lane :ipa_develop do
     build_ios_app(

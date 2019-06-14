@@ -13,8 +13,8 @@ pipeline {
                     try {
                         sh 'git checkout develop'
                         sh 'cat fastlane/Fastfile'
-                        sh 'bundle exec fastlane ios unit_test'
-                        sh 'bundle exec fastlane ios test_coverage'                 
+                        sh 'bundle exec fastlane ios test'
+                        //sh 'bundle exec fastlane ios test_coverage'                 
                         githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Tests succeeded', status: 'SUCCESS'   
                     }
                     catch (exc) {
