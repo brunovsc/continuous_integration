@@ -13,15 +13,17 @@ pipeline {
                     try {
                         sh 'git checkout develop'
                         sh 'bundle exec fastlane ios test'
-                        def result = readFile('fastlane/testErrorCode').trim()
-                        echo "ErrorCode = ${result}"
+                        def result = readFile('fastlane/testResultCode').trim()
+                        echo "ResultCode = ${result}"
+                        if (result == '0') {
+                            githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Tests succeeded', status: 'SUCCESS'  
+                        }
                         if (result == '1') {
-                            echo "AAAAA 1"
+                            githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Tests broken', status: 'FAILURE'
                         }
                         if (result == '2') {
-                            echo "BBBBB 2"
-                        }   
-                        githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Tests succeeded', status: 'SUCCESS'   
+                            githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Low code coverage', status: 'FAILURE'
+                        } 
                     }
                     catch (exc) {
                         echo exc

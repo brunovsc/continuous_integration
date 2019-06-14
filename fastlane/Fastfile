@@ -18,9 +18,9 @@
 platform :ios do
   desc "Description of what the lane does"
 
-  lane :printError do | options | 
-    errorCode = options[:errorCode]
-    sh "echo #{errorCode} > testErrorCode"
+  lane :printCode do | options | 
+    errorCode = options[:code]
+    sh "echo #{code} > testResultCode"
   end
 
   lane :test do    
@@ -29,7 +29,7 @@ platform :ios do
                 devices: ["iPhone Xʀ"])
     rescue => ex
       UI.important('run_tests failed!')
-      printError(errorCode: 1) # error code for tests failed
+      printCode(code: 1) # error code for tests failed
       next
     end
     begin
@@ -38,9 +38,10 @@ platform :ios do
            json_report: true)
     rescue => ex
       UI.important('xcov failed!')
-      printError(errorCode: 2) # error code for xcov failed
+      printCode(code: 2) # error code for xcov failed
       next
     end
+    printCode(code: 0)
   end
 
   lane :unit_test do
