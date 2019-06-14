@@ -12,6 +12,7 @@ pipeline {
                 dir('continuous_integration') {
                     script {
                         try {
+                            sh 'git checkout develop'
                             sh 'cat fastlane/Fastfile'
                             sh 'bundle exec fastlane ios unit_test'
                             sh 'bundle exec fastlane ios test_coverage'                 
