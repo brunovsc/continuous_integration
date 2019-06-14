@@ -15,10 +15,10 @@ pipeline {
                         sh 'bundle exec fastlane ios test'
                         def result = readFile('fastlane/testErrorCode').trim()
                         echo "ErrorCode = ${result}"
-                        if (result == 1) {
+                        if (result == '1') {
                             echo "AAAAA 1"
                         }
-                        if (result == 2) {
+                        if (result == '2') {
                             echo "BBBBB 2"
                         }   
                         githubNotify context: 'Jenkins', credentialsId: 'jenkins_pipeline', description: 'Tests succeeded', status: 'SUCCESS'   
